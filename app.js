@@ -2,6 +2,9 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+// find static file directory
+app.use(express.static('public'))
+
 // 載入 handlebars as template engine & set layout: main
 const exphbs = require('express-handlebars')
 app.engine('handlebars', exphbs({ defaultLayouts: 'main' }))
@@ -27,10 +30,30 @@ db.once('open', () => {
   console.log('db connected')
 })
 
-// set route
+// 載入 restaurant modle
+const Restaurant = require('./models/restaurant.js')
+
+// set route & show all restaurants
 app.get('/', (req, res) => {
-  res.render('index')
+  Restaurant.find()
+    .lean()
+    .exec((err, restaurants) => {
+      if (err) return console.error(err)
+      return res.render('index', { restaurants })
+    })
 })
+
+// show specific restaurant
+app.get('/restaurants/:_id', (req, res) => {
+  console.log(req.params)
+  Restaurant.findById(req.params._id)
+    .lean()
+    .exec((err, restaurant) => {
+      if (err) return console.error(err)
+      return res.render('show', { restaurant })
+    })
+})
+
 // listen app
 app.listen(port, () => {
   console.log('App is listening')
