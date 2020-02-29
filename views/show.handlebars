@@ -4,11 +4,38 @@
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
+      {{!-- buttons --}}
       <div class="text-left d-flex mb-2">
         <a href="/" class="btn btn-light btn-sm border-dark">Back</a>
         <a href=" /edit/{{restaurant._id}}" class="btn btn-sm btn-secondary border-dark ml-2">Edit</a>
         <form action="/delete/{{restaurant._id}}" method="post">
-          <button type="submit" class="btn btn-sm btn-dark text-white ml-2">Delete</button>
+
+          {{!-- modal box --}}
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+
+                <div class="modal-header">
+                  <h5 class="modal-title text-danger" id="exampleModalLabel">刪除警告</h5>
+                </div>
+
+                <div class="modal-body text-left">
+                  <p>確定要<span class="font-weight-bold text-danger">刪除</span>此筆資料嗎?</p>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-light border-dark" data-dismiss="modal">Back</button>
+                  <button type="submit" class="btn btn-danger border-dark">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-sm btn-dark text-white ml-2" data-toggle="modal"
+            data-target="#exampleModal">
+            Delete
+          </button>
         </form>
       </div>
       <p class="mb-1">

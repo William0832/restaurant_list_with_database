@@ -1,5 +1,15 @@
 <link rel="stylesheet" href="/stylesheets/index.css">
 
+{{!-- modal --}}
+{{!-- <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      ...
+    </div>
+  </div>
+</div> --}}
+
 <!-- search bar -->
 <div class="container search-bar">
   <div class="search-bar-outer">
@@ -33,6 +43,7 @@
         {{!-- each loop --}}
         {{#each restaurants}}
         <div class="card ">
+          {{!-- restaurants info.--}}
           <a href="/restaurants/{{this._id}}" class="text-secondary">
             <div class="mb-1">
               <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
@@ -52,7 +63,34 @@
           <div class="text-right m-2 d-flex">
             <a href="/edit/{{{this._id}}}" class="btn btn-sm btn-secondary border-dark mr-2">Edit</a>
             <form action="/delete/{{{this._id}}}" method="post">
-              <button type="submit" class="btn btn-sm btn-dark text-white">Delete</button>
+              <button type="button" class="btn btn-sm btn-dark text-white" data-toggle="modal"
+                data-target="#id{{this._id}}">
+                Delete
+              </button>
+
+              {{!-- modal box --}}
+              <div class="modal fade" id="id{{this._id}}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+
+                    <div class="modal-header">
+                      <h5 class="modal-title text-danger" id="exampleModalLabel">刪除警告</h5>
+                    </div>
+
+                    <div class="modal-body text-left">
+                      <p class="font-weight-bold">{{this.name}}</p>
+                      <p>確定要<span class="font-weight-bold text-danger">刪除</span>此筆資料嗎?</p>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-light border-dark" data-dismiss="modal">Back</button>
+                      <button type="submit" class="btn btn-danger border-dark">Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {{!-- modal box --}}
             </form>
           </div>
         </div>
