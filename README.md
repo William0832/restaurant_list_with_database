@@ -44,7 +44,7 @@ npm install
 4. **新增 Database**
 
 ```
-node ./models/seeds/seeder.js",
+node ./models/seeds/seeder.js"
 ```
 
 5. **執行專案**
