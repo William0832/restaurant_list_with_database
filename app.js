@@ -11,10 +11,27 @@ app.set('view engine', 'handlebars')
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// 載入 mongoose & 連線 DB & 使用 connection 物件
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/restaurant', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+const db = mongoose.connection
+// db error
+db.on('error', () => {
+  console.log('db error')
+})
+// db connected
+db.once('open', () => {
+  console.log('db connected')
+})
+
+// set route
 app.get('/', (req, res) => {
   res.render('index')
 })
-
+// listen app
 app.listen(port, () => {
   console.log('App is listening')
 })
