@@ -4,7 +4,13 @@
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
-
+      <div class="text-left d-flex mb-2">
+        <a href="/" class="btn btn-light btn-sm border-dark">Back</a>
+        <a href=" /edit/{{restaurant._id}}" class="btn btn-sm btn-secondary border-dark ml-2">Edit</a>
+        <form action="/delete/{{restaurant._id}}" method="post">
+          <button type="submit" class="btn btn-sm btn-dark text-white ml-2">Delete</button>
+        </form>
+      </div>
       <p class="mb-1">
         <span class="text-secondary">
           <i class="fas fa-utensils pr-2"></i>
