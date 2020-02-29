@@ -27,7 +27,7 @@ db.on('error', () => {
 })
 // db connected
 db.once('open', () => {
-  console.log('db connected')
+  console.log('db connected!')
 })
 
 // 載入 restaurant modle
@@ -91,7 +91,6 @@ app.get('/edit/:id', (req, res) => {
 app.post('/edit/:id', (req, res) => {
   Restaurant.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
-    console.log('OK')
     restaurant.name = req.body.name
     restaurant.name_en = req.body.name_en
     restaurant.category = req.body.category
@@ -120,7 +119,6 @@ app.post('/delete/:id', (req, res) => {
 // search
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
-  console.log(keyword)
   Restaurant.find()
     .lean()
     .exec((err, restaurants) => {
